@@ -53,6 +53,28 @@ class App {
         $this->router->post('/admin/portfolio/store', [\App\Controllers\Admin\PortfolioController::class, 'store']);
         $this->router->get('/admin/portfolio/delete/{id}', [\App\Controllers\Admin\PortfolioController::class, 'delete']);
 
+        // Admin Blog CMS
+        $this->router->get('/admin/blogs', [\App\Controllers\Admin\BlogController::class, 'index']);
+        $this->router->get('/admin/blogs/create', [\App\Controllers\Admin\BlogController::class, 'create']);
+        $this->router->post('/admin/blogs/store', [\App\Controllers\Admin\BlogController::class, 'store']);
+        $this->router->get('/admin/blogs/edit/{id}', [\App\Controllers\Admin\BlogController::class, 'edit']);
+        $this->router->post('/admin/blogs/update/{id}', [\App\Controllers\Admin\BlogController::class, 'update']);
+        $this->router->get('/admin/blogs/delete/{id}', [\App\Controllers\Admin\BlogController::class, 'delete']);
+        $this->router->post('/admin/blogs/upload-image', [\App\Controllers\Admin\BlogController::class, 'uploadImage']);
+
+        // Admin Before/After Gallery
+        $this->router->get('/admin/gallery', [\App\Controllers\Admin\GalleryController::class, 'index']);
+        $this->router->post('/admin/gallery/store', [\App\Controllers\Admin\GalleryController::class, 'store']);
+        $this->router->get('/admin/gallery/delete/{id}', [\App\Controllers\Admin\GalleryController::class, 'delete']);
+
+        // Admin Testimonials / Reviews Moderation
+        $this->router->get('/admin/reviews', [\App\Controllers\Admin\ReviewController::class, 'index']);
+        $this->router->post('/admin/reviews/store', [\App\Controllers\Admin\ReviewController::class, 'store']);
+        $this->router->get('/admin/reviews/approve/{id}', [\App\Controllers\Admin\ReviewController::class, 'approve']);
+        $this->router->get('/admin/reviews/disapprove/{id}', [\App\Controllers\Admin\ReviewController::class, 'disapprove']);
+        $this->router->get('/admin/reviews/toggle-featured/{id}', [\App\Controllers\Admin\ReviewController::class, 'toggleFeatured']);
+        $this->router->get('/admin/reviews/delete/{id}', [\App\Controllers\Admin\ReviewController::class, 'delete']);
+
         // Admin Settings & Content CMS
         $this->router->get('/admin/settings', [\App\Controllers\Admin\SettingsController::class, 'index']);
         $this->router->post('/admin/settings/save', [\App\Controllers\Admin\SettingsController::class, 'save']);

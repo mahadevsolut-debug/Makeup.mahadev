@@ -57,3 +57,20 @@ INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('hero_heading', 'Timeless Beauty & Elegance Redefined'),
 ('hero_subheading', 'Book award-winning bridal, party, and luxury HD makeup services crafted for your special moments.'),
 ('cta_booking_text', 'Reserve Your Date');
+
+-- Seed Blog Categories
+INSERT INTO `blog_categories` (`id`, `name`, `slug`) VALUES
+(1, 'Bridal Skincare', 'bridal-skincare'),
+(2, 'Makeup Guides', 'makeup-guides'),
+(3, 'Beauty Trends', 'beauty-trends');
+
+-- Seed Sample Blogs
+INSERT INTO `blogs` (`id`, `category_id`, `title`, `slug`, `content`, `featured_image`, `meta_title`, `meta_description`, `status`) VALUES
+(1, 1, 'Pre-Bridal Skincare Routine for a Flawless Wedding Glow', 'pre-bridal-skincare-routine-wedding-glow', '<p>Every bride wants that natural, radiant glow on her wedding day. Achieving it isn\'t just about high-definition foundation; it starts with dynamic pre-bridal skincare. We recommend establishing a consistent routine at least three months before your big day.</p><h2>Skincare Steps:</h2><ul><li><strong>Hydrate:</strong> Drink at least 3 liters of water daily.</li><li><strong>Double Cleanse:</strong> Remove dirt and makeup with oil-based cleansers first.</li><li><strong>Exfoliate:</strong> Use mild chemical exfoliators (AHAs/BHAs) to peel dead cells.</li></ul>', 'bridal_skincare.jpg', 'Pre-Bridal Skincare Tips | Makeup.mahadev', 'Learn the ultimate pre-wedding skincare preparation routine to get a flawless, long-lasting wedding day glow.', 'published'),
+(2, 2, 'How to Make Your Makeup Last 16+ Hours Under Camera Lights', 'make-makeup-last-long-duration', '<p>Whether you are on a high-fashion editorial set or sitting through a long-duration wedding reception, makeup longevity is critical. Here is how professional artists ensure flawless camera-ready skin that stays waterproof all day.</p><h2>Top Secrets:</h2><ul><li>Always start with a silicone-based skin primer.</li><li>Bake with loose translucent setting powder.</li><li>Seal with professional heavy-duty finishing sprays.</li></ul>', 'makeup_longevity.jpg', 'Camera-Ready Makeup Secrets', 'Discover the professional techniques used to make bridal and fashion makeup stay fresh and waterproof for over 16 hours.', 'published');
+
+-- Seed Sample Reviews
+INSERT INTO `reviews` (`id`, `client_name`, `client_role`, `rating`, `review_text`, `is_featured`, `status`) VALUES
+(1, 'Priya Sharma', 'Royal Wedding Bride', 5, 'The HD Airbrush Makeup was absolutely flawless! It stayed fresh from my morning sangeet until the midnight reception without a single touch-up. Truly the best makeup experience!', 1, 'approved'),
+(2, 'Meera Iyer', 'Fashion Editorial Model', 5, 'Exceptional detail and texture preservation. Under harsh studio camera lights, the skin finish looked incredibly natural and glowing. Highly recommended for celebrity portfolios!', 1, 'approved');
+

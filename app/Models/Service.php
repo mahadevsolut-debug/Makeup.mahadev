@@ -39,6 +39,21 @@ class Service {
         return Database::lastInsertId();
     }
 
+    public static function update($id, $data) {
+        $slug = preg_replace('/[^a-z0-9-]+/', '-', strtolower(trim($data['title'])));
+        if (!empty($data['cover_image'])) {
+            return Database::query(
+                "UPDATE services SET category_id = ?, title = ?, slug = ?, description = ?, cover_image = ?, duration = ?, pricing_type = ?, simple_price = ?, status = ?, is_featured = ? WHERE id = ?",
+                [$data['category_id'] ?? null, $data['title'], $slug, $data['description'], $data['cover_image'], $data['duration'] ?? '2 Hours', $data['pricing_type'] ?? 'package', $data['simple_price'] ?? 0, $data['status'] ?? 'active', $data['is_featured'] ?? 0, $id]
+            );
+        } else {
+            return Database::query(
+                "UPDATE services SET category_id = ?, title = ?, slug = ?, description = ?, duration = ?, pricing_type = ?, simple_price = ?, status = ?, is_featured = ? WHERE id = ?",
+                [$data['category_id'] ?? null, $data['title'], $slug, $data['description'], $data['duration'] ?? '2 Hours', $data['pricing_type'] ?? 'package', $data['simple_price'] ?? 0, $data['status'] ?? 'active', $data['is_featured'] ?? 0, $id]
+            );
+        }
+    }
+
     public static function delete($id) {
         return Database::query("DELETE FROM services WHERE id = ?", [$id]);
     }

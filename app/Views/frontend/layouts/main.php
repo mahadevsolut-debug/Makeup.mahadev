@@ -20,15 +20,15 @@
                         brand: {
                             50: '#fff1f2',
                             100: '#ffe4e6',
-                            500: '#f43f5e',
-                            600: '#e11d48',
-                            700: '#be123c',
-                            900: '#881337',
+                            500: 'var(--color-primary)',
+                            600: 'var(--color-primary-dark)',
+                            700: 'var(--color-secondary)',
+                            900: 'var(--color-secondary-dark)',
                         },
                         gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                            400: 'var(--color-accent)',
+                            500: 'var(--color-accent)',
+                            600: 'var(--color-accent)',
                         }
                     },
                     fontFamily: {
@@ -47,6 +47,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        :root {
+            --color-primary: <?= htmlspecialchars($globalSettings['primary_color'] ?? '#e11d48') ?>;
+            --color-primary-dark: <?= htmlspecialchars($globalSettings['secondary_color'] ?? '#be123c') ?>;
+            --color-secondary: <?= htmlspecialchars($globalSettings['secondary_color'] ?? '#be123c') ?>;
+            --color-secondary-dark: <?= htmlspecialchars($globalSettings['secondary_color'] ?? '#881337') ?>;
+            --color-accent: <?= htmlspecialchars($globalSettings['accent_color'] ?? '#fbbf24') ?>;
+        }
         .glass-panel {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(16px);
@@ -61,10 +68,10 @@
         }
     </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-rose-600 selection:text-white">
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
 
     <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-rose-900 via-rose-700 to-rose-900 text-rose-100 text-xs py-2 px-4 text-center tracking-wide font-medium">
+    <div class="bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700 text-rose-100 text-xs py-2 px-4 text-center tracking-wide font-medium">
         ✨ Direct Booking Special Offer: Complimentary Hydration Pre-Makeup Prep for all online bookings!
     </div>
 
@@ -74,9 +81,13 @@
             
             <!-- Brand Logo -->
             <a href="<?= BASE_URL ?>" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-rose-600 to-amber-500 flex items-center justify-center text-white font-serif text-xl font-bold shadow-lg shadow-rose-900/40 group-hover:scale-105 transition">
-                    M
-                </div>
+                <?php if (!empty($globalSettings['site_logo'])): ?>
+                    <img src="<?= BASE_URL ?>/uploads/<?= htmlspecialchars($globalSettings['site_logo']) ?>" alt="<?= htmlspecialchars($globalSettings['site_name'] ?? 'Logo') ?>" class="h-12 w-auto object-contain">
+                <?php else: ?>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-amber-500 flex items-center justify-center text-white font-serif text-xl font-bold shadow-lg shadow-rose-900/40 group-hover:scale-105 transition">
+                        M
+                    </div>
+                <?php endif; ?>
                 <div class="flex flex-col">
                     <span class="font-serif text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-rose-200 to-amber-200 bg-clip-text text-transparent">
                         <?= htmlspecialchars($globalSettings['site_name'] ?? 'Makeup.mahadev') ?>
@@ -86,20 +97,21 @@
             </a>
 
             <!-- Desktop Nav Items -->
+            <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-300">
-                <a href="<?= BASE_URL ?>" class="hover:text-rose-400 transition">Home</a>
-                <a href="<?= BASE_URL ?>/about" class="hover:text-rose-400 transition">About</a>
-                <a href="<?= BASE_URL ?>/services" class="hover:text-rose-400 transition">Services & Pricing</a>
-                <a href="<?= BASE_URL ?>/portfolio" class="hover:text-rose-400 transition">Portfolio</a>
-                <a href="<?= BASE_URL ?>/gallery" class="hover:text-rose-400 transition">Gallery</a>
-                <a href="<?= BASE_URL ?>/blog" class="hover:text-rose-400 transition">Blog</a>
-                <a href="<?= BASE_URL ?>/reviews" class="hover:text-rose-400 transition">Reviews</a>
-                <a href="<?= BASE_URL ?>/contact" class="hover:text-rose-400 transition">Contact</a>
+                <a href="<?= BASE_URL ?>" class="hover:text-brand-500 transition">Home</a>
+                <a href="<?= BASE_URL ?>/about" class="hover:text-brand-500 transition">About</a>
+                <a href="<?= BASE_URL ?>/services" class="hover:text-brand-500 transition">Services & Pricing</a>
+                <a href="<?= BASE_URL ?>/portfolio" class="hover:text-brand-500 transition">Portfolio</a>
+                <a href="<?= BASE_URL ?>/gallery" class="hover:text-brand-500 transition">Gallery</a>
+                <a href="<?= BASE_URL ?>/blog" class="hover:text-brand-500 transition">Blog</a>
+                <a href="<?= BASE_URL ?>/reviews" class="hover:text-brand-500 transition">Reviews</a>
+                <a href="<?= BASE_URL ?>/contact" class="hover:text-brand-500 transition">Contact</a>
             </nav>
 
             <!-- Book Now Action -->
             <div class="hidden md:flex items-center gap-4">
-                <a href="<?= BASE_URL ?>/booking" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-semibold text-sm shadow-lg shadow-rose-900/50 hover:shadow-rose-600/50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+                <a href="<?= BASE_URL ?>/booking" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-700 text-white font-semibold text-sm shadow-lg shadow-rose-900/50 hover:shadow-rose-600/50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
                     <i class="fa-regular font-bold fa-calendar-check"></i>
                     <span>Book Session</span>
                 </a>
@@ -121,7 +133,7 @@
             <a href="<?= BASE_URL ?>/blog" class="block text-zinc-200 font-medium py-2">Blog</a>
             <a href="<?= BASE_URL ?>/reviews" class="block text-zinc-200 font-medium py-2">Reviews</a>
             <a href="<?= BASE_URL ?>/contact" class="block text-zinc-200 font-medium py-2">Contact</a>
-            <a href="<?= BASE_URL ?>/booking" class="block w-full py-3 bg-rose-600 text-white rounded-xl font-bold shadow-lg">Book Session Now</a>
+            <a href="<?= BASE_URL ?>/booking" class="block w-full py-3 bg-brand-500 text-white rounded-xl font-bold shadow-lg">Book Session Now</a>
         </div>
     </header>
 
@@ -156,17 +168,21 @@
             <!-- Col 1: Brand -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-rose-600 flex items-center justify-center text-white font-serif font-bold">M</div>
+                    <?php if (!empty($globalSettings['site_logo'])): ?>
+                        <img src="<?= BASE_URL ?>/uploads/<?= htmlspecialchars($globalSettings['site_logo']) ?>" alt="Logo" class="h-10 w-auto object-contain">
+                    <?php else: ?>
+                        <div class="w-9 h-9 rounded-full bg-brand-500 flex items-center justify-center text-white font-serif font-bold">M</div>
+                    <?php endif; ?>
                     <span class="font-serif text-xl font-bold text-white"><?= htmlspecialchars($globalSettings['site_name'] ?? 'Makeup.mahadev') ?></span>
                 </div>
                 <p class="text-xs text-zinc-400 leading-relaxed">
                     <?= htmlspecialchars($globalSettings['site_tagline'] ?? 'Enhancing your natural grace with luxury makeup artistry.') ?>
                 </p>
                 <div class="flex gap-4 text-lg text-zinc-400 pt-2">
-                    <a href="#" class="hover:text-rose-500 transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-rose-500 transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-rose-500 transition"><i class="fa-brands fa-pinterest"></i></a>
-                    <a href="#" class="hover:text-rose-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
@@ -187,15 +203,15 @@
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Studio Info</h4>
                 <ul class="space-y-3 text-xs">
                     <li class="flex items-start gap-2">
-                        <i class="fa-solid fa-location-dot mt-0.5 text-rose-500"></i>
+                        <i class="fa-solid fa-location-dot mt-0.5 text-brand-500"></i>
                         <span><?= htmlspecialchars($globalSettings['office_address'] ?? 'Luxury Makeup Studio, City Center') ?></span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fa-solid fa-phone text-rose-500"></i>
+                        <i class="fa-solid fa-phone text-brand-500"></i>
                         <span><?= htmlspecialchars($globalSettings['contact_phone'] ?? '+91 98765 43210') ?></span>
                     </li>
                     <li class="flex items-center gap-2">
-                        <i class="fa-solid fa-envelope text-rose-500"></i>
+                        <i class="fa-solid fa-envelope text-brand-500"></i>
                         <span><?= htmlspecialchars($globalSettings['contact_email'] ?? 'contact@makeupmahadev.com') ?></span>
                     </li>
                 </ul>
@@ -206,8 +222,8 @@
                 <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Join VIP Beauty Club</h4>
                 <p class="text-xs mb-3">Subscribe for exclusive bridal discounts and seasonal skincare guides.</p>
                 <form class="flex gap-2">
-                    <input type="email" placeholder="Your email address" class="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-xs w-full text-white focus:outline-none focus:border-rose-500">
-                    <button type="submit" class="bg-rose-600 hover:bg-rose-500 text-white text-xs px-4 rounded-lg font-semibold transition">Join</button>
+                    <input type="email" placeholder="Your email address" class="bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-xs w-full text-white focus:outline-none focus:border-brand-500">
+                    <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white text-xs px-4 rounded-lg font-semibold transition">Join</button>
                 </form>
             </div>
 
@@ -230,7 +246,7 @@
             <span class="text-xs text-zinc-400 block">Luxury Bridal Sessions</span>
             <span class="text-sm font-bold text-amber-400">Slots Open for <?= date('Y') ?></span>
         </div>
-        <a href="<?= BASE_URL ?>/booking" class="px-5 py-2 rounded-full bg-rose-600 text-white font-bold text-xs shadow-lg">
+        <a href="<?= BASE_URL ?>/booking" class="px-5 py-2 rounded-full bg-brand-500 text-white font-bold text-xs shadow-lg">
             Book Now
         </a>
     </div>

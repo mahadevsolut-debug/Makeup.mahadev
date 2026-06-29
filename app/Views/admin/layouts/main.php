@@ -38,9 +38,21 @@
                     <i class="fa-solid fa-wand-magic-sparkles text-purple-500 w-5"></i>
                     <span>Services & Pricing</span>
                 </a>
+                <a href="<?= BASE_URL ?>/admin/blogs" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-900 hover:text-white transition">
+                    <i class="fa-solid fa-newspaper text-rose-400 w-5"></i>
+                    <span>Blogs Manager</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/gallery" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-900 hover:text-white transition">
+                    <i class="fa-solid fa-wand-magic text-yellow-400 w-5"></i>
+                    <span>Gallery Manager</span>
+                </a>
                 <a href="<?= BASE_URL ?>/admin/portfolio" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-900 hover:text-white transition">
                     <i class="fa-solid fa-images text-emerald-500 w-5"></i>
                     <span>Portfolio Uploads</span>
+                </a>
+                <a href="<?= BASE_URL ?>/admin/reviews" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-900 hover:text-white transition">
+                    <i class="fa-solid fa-comment-dots text-orange-400 w-5"></i>
+                    <span>Testimonials</span>
                 </a>
                 <a href="<?= BASE_URL ?>/admin/settings" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-900 hover:text-white transition">
                     <i class="fa-solid fa-sliders text-blue-500 w-5"></i>

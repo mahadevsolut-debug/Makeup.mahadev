@@ -33,6 +33,7 @@
                                 </span>
                             </td>
                             <td class="p-3 flex gap-3">
+                                <a href="<?= BASE_URL ?>/admin/services/edit/<?= $srv['id'] ?>" class="text-amber-400 hover:underline">Edit</a>
                                 <a href="<?= BASE_URL ?>/admin/services/delete/<?= $srv['id'] ?>" onclick="return confirm('Are you sure?')" class="text-rose-400 hover:underline">Delete</a>
                             </td>
                         </tr>

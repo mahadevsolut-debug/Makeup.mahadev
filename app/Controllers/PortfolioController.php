@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\Portfolio;
+use App\Models\Gallery;
 
 class PortfolioController extends Controller {
     public function index() {
@@ -16,7 +17,7 @@ class PortfolioController extends Controller {
     public function gallery() {
         $data = [
             'meta_title' => 'Transformation Gallery | Makeup.mahadev',
-            'items' => Portfolio::getAll()
+            'items' => Gallery::getAll()
         ];
         $this->view('frontend/gallery', $data);
     }

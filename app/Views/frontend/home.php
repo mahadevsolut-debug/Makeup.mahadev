@@ -1,11 +1,11 @@
 <!-- Hero Section -->
-<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20 px-4">
-    <div class="absolute inset-0 bg-gradient-to-br from-rose-950/40 via-zinc-950 to-amber-950/20 z-0"></div>
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
+<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20 px-4 bg-cover bg-center" style="background-image: url('<?= !empty($globalSettings['hero_image']) ? BASE_URL . '/uploads/' . htmlspecialchars($globalSettings['hero_image']) : '' ?>');">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-zinc-950/80 to-black/60 z-0"></div>
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-900/40 border border-rose-500/30 text-rose-300 text-xs tracking-widest uppercase font-semibold">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-900/40 border border-brand-500/30 text-brand-300 text-xs tracking-widest uppercase font-semibold">
             <i class="fa-solid fa-crown text-amber-400"></i> Luxury Bridal Artistry
         </span>
 
@@ -18,7 +18,7 @@
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a href="<?= BASE_URL ?>/booking" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-base shadow-xl shadow-rose-900/50 hover:shadow-rose-600/50 hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-3">
+            <a href="<?= BASE_URL ?>/booking" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-700 text-white font-bold text-base shadow-xl shadow-brand-900/50 hover:shadow-brand-600/50 hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-3">
                 <span><?= htmlspecialchars($globalSettings['cta_booking_text'] ?? 'Reserve Your Date') ?></span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
