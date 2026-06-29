@@ -49,13 +49,18 @@ Makeup.mahadev/
 4. Import `database/seeds.sql` into `makeup_mahadev`.
 
 ### 2. Environment & Configuration
-1. Open `config/config.php`.
-2. Verify database connection credentials:
-   ```php
-   define('DB_HOST', '127.0.0.1');
-   define('DB_NAME', 'makeup_mahadev');
-   define('DB_USER', 'root');
-   define('DB_PASS', '');
+1. Copy the `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Populate the `.env` file with your local database credentials:
+   ```env
+   APP_ENV=development
+   APP_DEBUG=true
+   DB_HOST=127.0.0.1
+   DB_NAME=makeup_mahadev
+   DB_USER=root
+   DB_PASS=
    ```
 
 ### 3. Running Locally
@@ -67,9 +72,40 @@ Makeup.mahadev/
 
 ---
 
+## 🚀 Hostinger & GitHub Deployment Guide
+
+This repository includes a configured GitHub Actions workflow (`.github/workflows/deploy.yml`) for automated SFTP deployment to Hostinger.
+
+### Step 1: Prepare Database on Hostinger
+1. Log in to your Hostinger hPanel and create a new **MySQL Database & User**.
+2. Note the database hostname (usually `localhost`), database name, user, and password.
+3. Import the `database/schema.sql` and `database/seeds.sql` files via phpMyAdmin.
+
+### Step 2: Configure Environment Variables
+1. Using Hostinger hPanel File Manager, create a `.env` file at the root of your `public_html/` folder.
+2. Populate it with Hostinger specific database credentials:
+   ```env
+   APP_ENV=production
+   APP_DEBUG=false
+   DB_HOST=localhost
+   DB_NAME=u123456789_mahadev
+   DB_USER=u123456789_admin
+   DB_PASS=YourSecurePassword Here
+   ```
+
+### Step 3: Add Repository Secrets on GitHub
+To authorize automatic deployments, configure these secrets in your GitHub repository (**Settings > Secrets and variables > Actions**):
+* `HOSTINGER_FTP_SERVER` - Your Hostinger FTP Host (e.g., `ftp.yourdomain.com` or server IP).
+* `HOSTINGER_FTP_USERNAME` - Your Hostinger FTP Username.
+* `HOSTINGER_FTP_PASSWORD` - Your Hostinger FTP Password.
+
+On every push to `main`, GitHub will compile and transfer the new updates directly to your site directory.
+
+---
+
 ## 🔐 Admin Access Credentials
 
-- **Admin Login URL**: `http://localhost/admin/login` (or `http://localhost:8000/admin/login`)
+- **Admin Login URL**: `https://yourdomain.com/admin/login`
 - **Email**: `admin@makeupmahadev.com`
 - **Default Password**: `admin123`
 
