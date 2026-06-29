@@ -133,6 +133,48 @@
             </div>
         </div>
 
+        <!-- Social Media Links -->
+        <div class="space-y-4">
+            <h3 class="font-serif text-lg font-bold text-white border-b border-zinc-800 pb-2">6. Social Media Links</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1"><i class="fa-brands fa-instagram text-pink-400 mr-1"></i> Instagram URL</label>
+                    <input type="url" name="settings[instagram_url]" value="<?= htmlspecialchars($settings['instagram_url'] ?? '') ?>" placeholder="https://instagram.com/yourstudio" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1"><i class="fa-brands fa-facebook text-blue-400 mr-1"></i> Facebook URL</label>
+                    <input type="url" name="settings[facebook_url]" value="<?= htmlspecialchars($settings['facebook_url'] ?? '') ?>" placeholder="https://facebook.com/yourstudio" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1"><i class="fa-brands fa-youtube text-red-400 mr-1"></i> YouTube URL</label>
+                    <input type="url" name="settings[youtube_url]" value="<?= htmlspecialchars($settings['youtube_url'] ?? '') ?>" placeholder="https://youtube.com/@yourchannel" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1"><i class="fa-brands fa-pinterest text-red-300 mr-1"></i> Pinterest URL</label>
+                    <input type="url" name="settings[pinterest_url]" value="<?= htmlspecialchars($settings['pinterest_url'] ?? '') ?>" placeholder="https://pinterest.com/yourstudio" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+            </div>
+        </div>
+
+        <!-- WhatsApp CTA & Footer Text -->
+        <div class="space-y-4">
+            <h3 class="font-serif text-lg font-bold text-white border-b border-zinc-800 pb-2">7. Footer & Misc Settings</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1">WhatsApp Chat Message</label>
+                    <input type="text" name="settings[whatsapp_message]" value="<?= htmlspecialchars($settings['whatsapp_message'] ?? 'Hi, I would like to book a makeover session!') ?>" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-400 mb-1">CTA Booking Button Text</label>
+                    <input type="text" name="settings[cta_booking_text]" value="<?= htmlspecialchars($settings['cta_booking_text'] ?? 'Reserve Your Date') ?>" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-zinc-400 mb-1">Footer Copyright Text</label>
+                <input type="text" name="settings[footer_text]" value="<?= htmlspecialchars($settings['footer_text'] ?? '© 2026 Makeup.mahadev. All rights reserved.') ?>" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:border-rose-500 focus:outline-none">
+            </div>
+        </div>
+
         <button type="submit" class="w-full py-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm shadow-xl shadow-rose-900/40 transition">
             Save Customizations
         </button>

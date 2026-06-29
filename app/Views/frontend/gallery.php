@@ -13,7 +13,7 @@
     <?php else: ?>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <?php foreach ($items as $item): ?>
-                <div class="dark-glass-panel rounded-3xl p-6 border border-zinc-800 space-y-4 flex flex-col justify-between">
+                <div class="dark-glass-panel rounded-3xl p-6 border border-zinc-800 space-y-4 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
                     <!-- Before/After Slider Container -->
                     <div x-data="{ sliderPos: 50 }" class="relative w-full h-[400px] overflow-hidden rounded-2xl border border-zinc-800 select-none">
                         

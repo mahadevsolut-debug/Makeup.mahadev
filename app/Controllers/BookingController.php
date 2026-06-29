@@ -33,6 +33,14 @@ class BookingController extends Controller {
         }
 
         $result = Booking::calculatePrice($serviceId, $packageId, $addons);
+        if ($result['status']) {
+            $service = Service::find($serviceId);
+            if ($service) {
+                $service['packages'] = \App\Models\Package::getByServiceId($serviceId);
+                $service['addons'] = \App\Models\Addon::getByServiceId($serviceId);
+                $result['service'] = $service;
+            }
+        }
         return $this->json($result);
     }
 
@@ -54,7 +62,7 @@ class BookingController extends Controller {
 
         $bookingResult = Booking::create([
             'service_id' => $serviceId,
-            'package_id' => $_POST['package_id'] ?? null,
+            'package_id' => !empty($_POST['package_id']) ? (int)$_POST['package_id'] : null,
             'addons' => $_POST['addons'] ?? [],
             'customer_name' => $customerName,
             'customer_email' => $customerEmail,

@@ -60,7 +60,8 @@ class Booking {
 
     public static function create(array $data) {
         $bookingCode = 'BK' . strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));
-        $priceCalculation = self::calculatePrice($data['service_id'], $data['package_id'] ?? null, $data['addons'] ?? []);
+        $packageId = !empty($data['package_id']) ? (int)$data['package_id'] : null;
+        $priceCalculation = self::calculatePrice($data['service_id'], $packageId, $data['addons'] ?? []);
 
         Database::query(
             "INSERT INTO bookings (booking_code, customer_name, customer_email, customer_phone, event_date, event_time, location, service_id, package_id, base_price, addons_total, total_price, notes, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')",
@@ -73,7 +74,7 @@ class Booking {
                 $data['event_time'],
                 $data['location'],
                 $data['service_id'],
-                $data['package_id'] ?? null,
+                $packageId,
                 $priceCalculation['base_price'],
                 $priceCalculation['addons_total'],
                 $priceCalculation['total_price'],

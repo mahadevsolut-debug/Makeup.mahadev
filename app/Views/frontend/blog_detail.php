@@ -1,6 +1,6 @@
 <article class="py-16 max-w-4xl mx-auto px-4 space-y-8">
     <div class="space-y-4">
-        <span class="text-xs font-bold px-3 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-800">
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-900/50 text-brand-300 border border-brand-700/50">
             <?= htmlspecialchars($post['category_name'] ?? 'Journal') ?>
         </span>
         <h1 class="font-serif text-4xl sm:text-5xl font-extrabold text-white leading-tight"><?= htmlspecialchars($post['title']) ?></h1>

@@ -20,6 +20,7 @@
                         brand: {
                             50: '#fff1f2',
                             100: '#ffe4e6',
+                            300: 'color-mix(in srgb, var(--color-primary) 60%, white)',
                             500: 'var(--color-primary)',
                             600: 'var(--color-primary-dark)',
                             700: 'var(--color-secondary)',
@@ -46,6 +47,9 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- AOS Animate On Scroll CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
     <style>
         :root {
             --color-primary: <?= htmlspecialchars($globalSettings['primary_color'] ?? '#e11d48') ?>;
@@ -66,12 +70,54 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #09090b;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255,255,255,0.08);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .preloader-brand {
+            animation: pulse-brand 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse-brand {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
 
+    <!-- Preloader Overlay -->
+    <div id="preloader">
+        <div class="text-center space-y-4">
+            <div class="preloader-spinner mx-auto"></div>
+            <p class="preloader-brand text-sm font-serif font-bold text-zinc-400 tracking-widest uppercase"><?= htmlspecialchars($globalSettings['site_name'] ?? 'Makeup.mahadev') ?></p>
+        </div>
+    </div>
+
     <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700 text-rose-100 text-xs py-2 px-4 text-center tracking-wide font-medium">
+    <div class="bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700 text-white text-xs py-2 px-4 text-center tracking-wide font-medium">
         ✨ Direct Booking Special Offer: Complimentary Hydration Pre-Makeup Prep for all online bookings!
     </div>
 
@@ -84,19 +130,18 @@
                 <?php if (!empty($globalSettings['site_logo'])): ?>
                     <img src="<?= BASE_URL ?>/uploads/<?= htmlspecialchars($globalSettings['site_logo']) ?>" alt="<?= htmlspecialchars($globalSettings['site_name'] ?? 'Logo') ?>" class="h-12 w-auto object-contain">
                 <?php else: ?>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-amber-500 flex items-center justify-center text-white font-serif text-xl font-bold shadow-lg shadow-rose-900/40 group-hover:scale-105 transition">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-gold-500 flex items-center justify-center text-white font-serif text-xl font-bold shadow-lg shadow-brand-900/40 group-hover:scale-105 transition">
                         M
                     </div>
                 <?php endif; ?>
                 <div class="flex flex-col">
-                    <span class="font-serif text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-rose-200 to-amber-200 bg-clip-text text-transparent">
+                    <span class="font-serif text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-zinc-200 to-gold-400 bg-clip-text text-transparent">
                         <?= htmlspecialchars($globalSettings['site_name'] ?? 'Makeup.mahadev') ?>
                     </span>
                     <span class="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Luxury Bridal & Makeup</span>
                 </div>
             </a>
 
-            <!-- Desktop Nav Items -->
             <!-- Desktop Nav Items -->
             <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-300">
                 <a href="<?= BASE_URL ?>" class="hover:text-brand-500 transition">Home</a>
@@ -111,7 +156,7 @@
 
             <!-- Book Now Action -->
             <div class="hidden md:flex items-center gap-4">
-                <a href="<?= BASE_URL ?>/booking" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-700 text-white font-semibold text-sm shadow-lg shadow-rose-900/50 hover:shadow-rose-600/50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+                <a href="<?= BASE_URL ?>/booking" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 hover:from-brand-600 hover:to-brand-700 text-white font-semibold text-sm shadow-lg shadow-brand-900/50 hover:shadow-brand-600/50 hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
                     <i class="fa-regular font-bold fa-calendar-check"></i>
                     <span>Book Session</span>
                 </a>
@@ -127,6 +172,7 @@
         <!-- Mobile Menu Dropdown -->
         <div x-show="mobileOpen" x-transition class="md:hidden bg-zinc-900 border-b border-zinc-800 px-6 py-6 space-y-4 text-center">
             <a href="<?= BASE_URL ?>" class="block text-zinc-200 font-medium py-2">Home</a>
+            <a href="<?= BASE_URL ?>/about" class="block text-zinc-200 font-medium py-2">About</a>
             <a href="<?= BASE_URL ?>/services" class="block text-zinc-200 font-medium py-2">Services & Pricing</a>
             <a href="<?= BASE_URL ?>/portfolio" class="block text-zinc-200 font-medium py-2">Portfolio</a>
             <a href="<?= BASE_URL ?>/gallery" class="block text-zinc-200 font-medium py-2">Gallery</a>
@@ -149,8 +195,8 @@
 
     <?php if ($err = \App\Core\Session::flash('error')): ?>
         <div class="max-w-7xl mx-auto px-4 mt-6">
-            <div class="p-4 rounded-xl bg-rose-950/80 border border-rose-600/50 text-rose-200 flex items-center gap-3">
-                <i class="fa-solid fa-circle-exclamation text-rose-400 text-xl"></i>
+            <div class="p-4 rounded-xl bg-red-950/80 border border-red-600/50 text-red-200 flex items-center gap-3">
+                <i class="fa-solid fa-circle-exclamation text-red-400 text-xl"></i>
                 <span><?= htmlspecialchars($err) ?></span>
             </div>
         </div>
@@ -178,11 +224,20 @@
                 <p class="text-xs text-zinc-400 leading-relaxed">
                     <?= htmlspecialchars($globalSettings['site_tagline'] ?? 'Enhancing your natural grace with luxury makeup artistry.') ?>
                 </p>
+                <!-- Dynamic Social Media Icons -->
                 <div class="flex gap-4 text-lg text-zinc-400 pt-2">
-                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-pinterest"></i></a>
-                    <a href="#" class="hover:text-brand-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <?php if (!empty($globalSettings['instagram_url'])): ?>
+                        <a href="<?= htmlspecialchars($globalSettings['instagram_url']) ?>" target="_blank" class="hover:text-brand-500 transition" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <?php endif; ?>
+                    <?php if (!empty($globalSettings['facebook_url'])): ?>
+                        <a href="<?= htmlspecialchars($globalSettings['facebook_url']) ?>" target="_blank" class="hover:text-brand-500 transition" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <?php endif; ?>
+                    <?php if (!empty($globalSettings['pinterest_url'])): ?>
+                        <a href="<?= htmlspecialchars($globalSettings['pinterest_url']) ?>" target="_blank" class="hover:text-brand-500 transition" title="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                    <?php endif; ?>
+                    <?php if (!empty($globalSettings['youtube_url'])): ?>
+                        <a href="<?= htmlspecialchars($globalSettings['youtube_url']) ?>" target="_blank" class="hover:text-brand-500 transition" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <?php endif; ?>
                 </div>
             </div>
 
@@ -230,26 +285,52 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 mt-12 pt-6 border-t border-zinc-800/60 text-center text-xs text-zinc-500 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; <?= date('Y') ?> <?= htmlspecialchars($globalSettings['site_name'] ?? 'Makeup.mahadev') ?>. All rights reserved.</p>
+            <p><?= htmlspecialchars($globalSettings['footer_text'] ?? '© ' . date('Y') . ' ' . ($globalSettings['site_name'] ?? 'Makeup.mahadev') . '. All rights reserved.') ?></p>
             <p><a href="<?= BASE_URL ?>/admin/login" class="hover:text-zinc-400 transition">Admin Portal Login</a></p>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/<?= htmlspecialchars($globalSettings['whatsapp_number'] ?? '919876543210') ?>?text=Hello%21%20I%20would%20like%20to%20inquire%20about%20makeup%20booking." target="_blank" class="fixed bottom-6 right-6 z-40 bg-emerald-500 hover:bg-emerald-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-900/50 hover:scale-110 transition duration-300">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    <!-- Floating WhatsApp Button (positioned above mobile sticky bar) -->
+    <?php
+        $waNumber = htmlspecialchars($globalSettings['whatsapp_number'] ?? '919876543210');
+        $waMessage = urlencode($globalSettings['whatsapp_message'] ?? 'Hi, I would like to book a makeover session!');
+    ?>
+    <a href="https://wa.me/<?= $waNumber ?>?text=<?= $waMessage ?>" target="_blank"
+       class="fixed bottom-24 md:bottom-6 right-4 md:right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300"
+       style="background-color: var(--color-primary);"
+       title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp text-white text-3xl"></i>
     </a>
 
     <!-- Sticky Mobile Book Now Bar -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 z-30 p-3 dark-glass-panel border-t border-zinc-800 flex justify-between items-center px-6">
         <div>
             <span class="text-xs text-zinc-400 block">Luxury Bridal Sessions</span>
-            <span class="text-sm font-bold text-amber-400">Slots Open for <?= date('Y') ?></span>
+            <span class="text-sm font-bold text-gold-400">Slots Open for <?= date('Y') ?></span>
         </div>
         <a href="<?= BASE_URL ?>/booking" class="px-5 py-2 rounded-full bg-brand-500 text-white font-bold text-xs shadow-lg">
             Book Now
         </a>
     </div>
+
+    <!-- AOS Animate On Scroll JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS scroll animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60
+        });
+
+        // Preloader fade-out
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 400);
+        });
+    </script>
 
 </body>
 </html>

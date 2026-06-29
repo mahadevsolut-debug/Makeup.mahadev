@@ -18,17 +18,23 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-zinc-800">
-                    <?php foreach ($bookings as $b): ?>
+                    <?php if (empty($bookings)): ?>
                         <tr>
-                            <td class="p-3 font-mono text-amber-400 font-bold"><?= htmlspecialchars($b['booking_code']) ?></td>
-                            <td class="p-3 font-semibold text-white"><?= htmlspecialchars($b['customer_name']) ?></td>
-                            <td class="p-3"><?= htmlspecialchars($b['customer_phone']) ?></td>
-                            <td class="p-3"><?= htmlspecialchars($b['event_date']) ?></td>
-                            <td class="p-3 font-bold text-white">₹<?= number_format($b['total_price'], 2) ?></td>
-                            <td class="p-3 font-bold capitalize text-rose-400"><?= htmlspecialchars($b['status']) ?></td>
-                            <td class="p-3"><a href="<?= BASE_URL ?>/admin/bookings/view/<?= $b['id'] ?>" class="text-xs text-rose-400 hover:underline">View Details</a></td>
+                            <td colspan="7" class="p-6 text-center text-zinc-500">No booking requests found.</td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <?php foreach ($bookings as $b): ?>
+                            <tr>
+                                <td class="p-3 font-mono text-amber-400 font-bold"><?= htmlspecialchars($b['booking_code']) ?></td>
+                                <td class="p-3 font-semibold text-white"><?= htmlspecialchars($b['customer_name']) ?></td>
+                                <td class="p-3"><?= htmlspecialchars($b['customer_phone']) ?></td>
+                                <td class="p-3"><?= htmlspecialchars($b['event_date']) ?></td>
+                                <td class="p-3 font-bold text-white">₹<?= number_format($b['total_price'], 2) ?></td>
+                                <td class="p-3 font-bold capitalize text-rose-400"><?= htmlspecialchars($b['status']) ?></td>
+                                <td class="p-3"><a href="<?= BASE_URL ?>/admin/bookings/view/<?= $b['id'] ?>" class="text-xs text-rose-400 hover:underline">View Details</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
